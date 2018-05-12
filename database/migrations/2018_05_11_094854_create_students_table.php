@@ -19,7 +19,8 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->string('level');
             $table->string('program');
-            $table->string('class');
+            $table->string('room');   
+            $table->string('class');                     
             $table->timestamps();
         });
     }
