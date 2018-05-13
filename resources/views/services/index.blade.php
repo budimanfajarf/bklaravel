@@ -20,23 +20,31 @@
                     <ul class="list-group">
                         @foreach ($services as $service)
                             <li class="list-group-item">
-                                <strong class="lead">{{ $service->name }}</strong>
-                                &nbsp;&nbsp;
-                                <a href=""><span class="badge badge-primary badge-pill" style="font-size:100%">Add</span></a>                                
-                                <a href="/services/{{ $service->id }}/edit"><span class="badge badge-primary badge-pill" style="font-size:100%">Edit</span></a>
-                                <form action="/services/{{ $service->id }}" method="POST" style="display:inline">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="_method" value="DELETE">  
-                                    <button class="btn badge badge-danger badge-pill" style="font-size:100%">Delete</button>
-                                </form>                                 
+                                <div style="padding: 10px;">
+                                    <strong class="lead" style="font-weight: 600">{{ $service->name }}</strong>
+                                    &nbsp;&nbsp;                         
+                                    <a href="/services/{{ $service->id }}/edit" class="btn btn-primary">Edit</a>
+                                    <form action="/services/{{ $service->id }}" method="POST" style="display:inline">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="_method" value="DELETE">  
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form> 
+                                </div>
                                 <ul class="list-group list-group-flush">
-                                @foreach ($service->subservices as $subservice)
-                                    <li class="list-group-item">{{ $subservice->name }}
-                                        &nbsp;&nbsp;
-                                        <a href="" style="font-size: 110%;"><span class="badge badge-primary badge-pill">Edit</span></a>
-                                        <a href="" style="font-size: 110%;"><span class="badge badge-danger badge-pill">Delete</span></a>
+                                    @foreach ($service->subservices as $subservice)
+                                        <li class="list-group-item">{{ $subservice->name }}
+                                            &nbsp;&nbsp;
+                                            <a href="/subservices/{{ $subservice->id }}/edit" class="btn btn-outline-primary btn-sm">Edit</a>
+                                            <form action="/subservices/{{ $subservice->id }}" method="POST" style="display:inline">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="_method" value="DELETE">  
+                                                <button class="btn btn-outline-danger btn-sm">Delete</button>
+                                            </form>                                         
+                                        </li>
+                                    @endforeach
+                                    <li class="list-group-item">
+                                        <a href="/subservices/{{ $service->id }}/create"><span class="btn btn-outline-primary btn-sm">Tambah sub Layanan</span></a>
                                     </li>
-                                @endforeach
                                 </ul>
                             </li>
                         @endforeach                           

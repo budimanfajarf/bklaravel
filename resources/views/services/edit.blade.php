@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-7">
             <div class="card">
-                <div class="card-header text-center">Edit Siswa</div>
+                <div class="card-header text-center">Edit Layanan</div>
                 <div class="card-body">
                     @if (count($errors) > 0)
                     <div class="alert alert-danger">
