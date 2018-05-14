@@ -14,4 +14,9 @@ class Subservice extends Model
     {
         return $this->belongsTo('App\Service');
     }
+
+    public function records() 
+    {
+        return $this->hasMany('App\Record');
+    }    
 }

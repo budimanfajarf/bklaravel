@@ -21,7 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('students', 'StudentController');
+
     Route::resource('services', 'ServiceController');
+    
     Route::get('subservices/{currentServiceId}/create', 'SubServiceController@create'); 
     Route::post('subservices', 'SubServiceController@store'); 
     Route::delete('subservices/{id}', 'SubServiceController@destroy'); 
@@ -30,4 +32,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('subservices/{id}', 'SubServiceController@show');
     Route::get('subservices/', 'SubServiceController@index');  
     // Route::resource('subservices', 'SubserviceController');
+
+    Route::resource('record', 'RecordController');
 });

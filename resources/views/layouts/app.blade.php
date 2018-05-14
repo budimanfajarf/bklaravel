@@ -46,7 +46,7 @@
                         @else
                             <li><a class="nav-link" href="{{ url('/students') }}">Siswa</a></li>                        
                             <li><a class="nav-link" href="{{ url('/services') }}">Layanan</a></li>                                                    
-                            <li><a class="nav-link" href="{{ url('/records') }}">Bimbingan</a></li>                                                                                
+                            <li><a class="nav-link" href="{{ url('/record') }}">Bimbingan</a></li>                                                                                
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
