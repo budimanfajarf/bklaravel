@@ -47,10 +47,11 @@ class RecordController extends Controller
             'subservice_id' => 'required',
             'place'         => 'required',
             'desc'          => 'required',
-            'info'          => 'required'
+            'info'          => 'required',
+            'students.0'    => 'required'
         ]);        
 
-        dd("store");        
+        dd($request);
     }
 
     /**

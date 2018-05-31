@@ -154,4 +154,13 @@ class StudentController extends Controller
 
         return redirect('students')->with('msg', $msg); 
     }
+
+    public function api($search = null)
+    {
+        if($search != null)
+        {
+            $students = Student::where('name', 'like', '%'.$search.'%')->orWhere('code', 'like', '%'.$search.'%')->get();
+            return $students;    
+        }
+    }
 }

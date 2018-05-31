@@ -34,4 +34,6 @@ Route::group(['middleware' => 'auth'], function(){
     // Route::resource('subservices', 'SubserviceController');
 
     Route::resource('record', 'RecordController');
+
+    Route::get('api/students/{search?}', 'StudentController@api'); 
 });

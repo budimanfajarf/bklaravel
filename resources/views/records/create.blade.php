@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script> 
+<script src="{{ asset('js/students.js') }}"></script> 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -53,9 +55,28 @@
                             <div class="card-header text-center">Siswa yang Bersangkutan</div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">Cari Siswa</label>
-                                    <input name="name" type="text" class="form-control" placeholder="Cari Siswa dengan Nama atau Nim" value="{{ old('name') }}" >
-                                </div>                 
+                                    <label for="search">Cari Siswa</label>
+                                    <input name="search" id="search" type="text" class="form-control" autocomplete="off" placeholder="Cari Siswa dengan Nama atau Nim" >
+                                </div>
+                                <div id="table_container"></div>
+                                <br>
+                                <div id="table_added_container">
+                                    @if (old("students"))
+                                        <label>Siswa yang sudah ditambahkan</label>
+                                        <table id="table_added" class="table table-striped">
+                                            <tr>
+                                                <th>NIS</th>
+                                                <th>Nama</th>
+                                                <th>Kelas</th>
+                                                <th>Aksi</th>
+                                            </tr>                                     
+                                        @foreach (old("students") as $student)                  <tr>
+                                                <td>How???? {{ $student }}</td>
+                                            </tr>
+                                        @endforeach
+                                        </table>
+                                    @endif
+                                </div>
                             </div>  
                         </div>
                         {{ csrf_field() }}
