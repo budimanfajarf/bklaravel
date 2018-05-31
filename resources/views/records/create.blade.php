@@ -69,9 +69,26 @@
                                                 <th>Nama</th>
                                                 <th>Kelas</th>
                                                 <th>Aksi</th>
-                                            </tr>                                     
-                                        @foreach (old("students") as $student)                  <tr>
-                                                <td>How???? {{ $student }}</td>
+                                            </tr>  
+                                        @php
+                                            foreach (old("students") as $key => $value) {
+                                                foreach ($value as $keyy => $valuee) {
+                                                    $students[$keyy][$key] = $valuee;
+                                                }
+                                            }
+                                        @endphp    
+                                        @foreach ($students as $student)
+                                            <tr>
+                                                <input type="hidden" name="students[id][]" value="{{ $student["id"] }}">
+                                                <input type="hidden" name="students[code][]" value="{{ $student["code"] }}">
+                                                <input type="hidden" name="students[name][]" value="{{ $student["name"] }}">
+                                                <input type="hidden" name="students[clas][]" value="{{ $student["clas"] }}">
+                                                <td>{{ $student["code"] }}</td>
+                                                <td>{{ $student["name"] }}</td>
+                                                <td>{{ $student["clas"] }}</td>
+                                                <td> 
+                                                    <a href="#" class="delete btn btn-outline-danger btn-sm" role="button">Delete</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </table>

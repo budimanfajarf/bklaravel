@@ -28,7 +28,7 @@ $(document).ready(function(){
                                     "<input type='hidden' value='"+ id +"' name='id'>" +
                                     "<a href='#' class='add btn btn-outline-primary btn-sm' role='button'>Add</a>" +
                                 "</td>" +
-                            "</tr>";                        
+                              "</tr>";                        
                 });                   
                 table += "</table>"; 
                 $("#table_container").empty();  
@@ -47,16 +47,19 @@ $(document).ready(function(){
         let clas = parentTr.find("td:eq(2)").text();
 
         let addData = "<tr>" +
-                        "<input type='hidden' name='students[]' value="+id+">" +
+                        "<input type='hidden' name='students[id][]'   value='"+id+"'>" +
+                        "<input type='hidden' name='students[code][]' value='"+code+"'>" +
+                        "<input type='hidden' name='students[name][]' value='"+name+"'>" +
+                        "<input type='hidden' name='students[clas][]' value='"+clas+"'>" +
                         "<td>" + code + "</td>" +
                         "<td>" + name + "</td>" +
                         "<td>" + clas + "</td>" +
                         "<td><a href='#' class='delete btn btn-outline-danger btn-sm' role='button'>Delete</a></td>" +
-                        "</tr>";
+                      "</tr>";
 
         if ($("#table_added_container").find("table").length) {
             let added = false;
-            $("#table_added input[name='students[]']").each(function(index){
+            $("#table_added input[name='students[id][]']").each(function(){
                 if ($(this).val() === id) {
                     added = true;
                 }                       

@@ -48,10 +48,23 @@ class RecordController extends Controller
             'place'         => 'required',
             'desc'          => 'required',
             'info'          => 'required',
-            'students.0'    => 'required'
-        ]);        
+            'students.id.0' => 'required'
+        ]);   
 
-        dd($request);
+        foreach ($request->students as $key => $value) {
+            foreach ($value as $keyy => $valuee) {
+                $students[$keyy][$key] = $valuee;
+            }
+        }
+
+        foreach ($students as $student) {
+            echo $student["id"]."-".
+                 $student["code"]."-".
+                 $student["name"]."-".
+                 $student["clas"]."-".
+                 "<br>";
+        }
+        die();
     }
 
     /**
