@@ -16,7 +16,7 @@ class RecordController extends Controller
      */
     public function index()
     {
-        $records = Record::with("subservice","students")->orderBy('date', 'desc')->orderBy('id', 'desc')->paginate(5);
+        $records = Record::with('subservice','students')->orderBy('date', 'desc')->orderBy('id', 'desc')->paginate(5);
         // dd($records);
         return view('records.index', compact('records'));
     }
@@ -28,7 +28,7 @@ class RecordController extends Controller
      */
     public function create()
     {
-        // dd("create");
+        // dd('create');
         $services = Service::with('subservices')->get();
         // dd($services);
         return view('records.create', compact('services'));        
@@ -51,20 +51,19 @@ class RecordController extends Controller
             'students.id.0' => 'required'
         ]);   
 
-        foreach ($request->students as $key => $value) {
-            foreach ($value as $keyy => $valuee) {
-                $students[$keyy][$key] = $valuee;
-            }
-        }
+        // Save to record
+        $record = Record::create([
+            'date'          => $request->date,
+            'subservice_id' => $request->subservice_id,
+            'place'         => $request->place,
+            'desc'          => $request->desc,
+            'info'          => $request->info
+        ]);    
+        
+        // Save to record_student
+        $record->students()->attach($request->students['id']);
 
-        foreach ($students as $student) {
-            echo $student["id"]."-".
-                 $student["code"]."-".
-                 $student["name"]."-".
-                 $student["clas"]."-".
-                 "<br>";
-        }
-        die();
+        return redirect('record')->with('msg', 'Bimbingan berhasil di <strong>Submit</strong>');
     }
 
     /**
@@ -75,7 +74,7 @@ class RecordController extends Controller
      */
     public function show($id)
     {
-        dd("show");
+        dd('show');
     }
 
     /**
@@ -86,7 +85,7 @@ class RecordController extends Controller
      */
     public function edit($id)
     {
-        dd("edit");
+        dd('edit');
     }
 
     /**
@@ -98,7 +97,7 @@ class RecordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd("update");
+        dd('update');
     }
 
     /**
@@ -109,6 +108,7 @@ class RecordController extends Controller
      */
     public function destroy($id)
     {
-        dd("destroy");
+        Record::findOrFail($id)->delete();
+        return redirect('record')->with('msg', 'Bimbingan berhasil di <strong>Hapus</strong>');
     }
 }
