@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/my.css') }}">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -14,18 +15,29 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>    
-                    @endif                    
-                    <a href="{{ url('/record/create') }}" class="btn btn-primary" role="button" >Tambah Bimbingan</a>
-                    <br><br>
+                    @endif  
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="{{ url('/record/create') }}" class="btn btn-primary" role="button" >Tambah Bimbingan</a>
+                        </div>
+                        <div class="col-md-4 my-pagination-center">
+                            {{ $records->appends(Request::input())->render() }}
+                        </div>
+                        <div class="col-md-4">
+                            <form action="#">
+                                <input type="text" name="search" class="form-control" placeholder="Search dengan nis atau nama siswa">
+                            </form>
+                        </div>
+                    </div>                  
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Tanggal</th>
-                                    <th scope="col">Nama Kegiatan</th>
+                                    <th scope="col">Kegiatan</th>
                                     <th scope="col">Tempat</th>
-                                    <th scope="col">Uraian Kegiatan</th>
+                                    <th scope="col">Uraian</th>
                                     <th scope="col">Keterangan</th>    
                                     <th scope="col">Siswa yang bersangkutan</th>                   <th scope="col">Aksi</th> 
                                 </tr>
@@ -59,8 +71,7 @@
                                 @endforeach
                             </tbody>
                         </table> 
-                    </div> 
-                    {{ $records->appends(Request::input())->render() }}                  
+                    </div>                   
                 </div>
 
             </div>

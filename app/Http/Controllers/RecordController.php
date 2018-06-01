@@ -16,8 +16,7 @@ class RecordController extends Controller
      */
     public function index()
     {
-        $records = Record::with('subservice','students')->orderBy('date', 'desc')->orderBy('id', 'desc')->paginate(5);
-        // dd($records);
+        $records = Record::with('subservice','students')->orderBy('date', 'desc')->orderBy('id', 'desc')->paginate(3);
         return view('records.index', compact('records'));
     }
 
@@ -28,9 +27,7 @@ class RecordController extends Controller
      */
     public function create()
     {
-        // dd('create');
         $services = Service::with('subservices')->get();
-        // dd($services);
         return view('records.create', compact('services'));        
     }
 
@@ -74,7 +71,8 @@ class RecordController extends Controller
      */
     public function show($id)
     {
-        dd('show');
+        $record = Record::with('subservice','students')->findOrFail($id);
+        return view('records.single', compact('record'));
     }
 
     /**
@@ -85,7 +83,9 @@ class RecordController extends Controller
      */
     public function edit($id)
     {
-        dd('edit');
+        $record   = Record::with('students')->findOrFail($id);
+        $services = Service::with('subservices')->get();
+        return view('records.edit', compact('record','services'));         
     }
 
     /**
@@ -97,7 +97,30 @@ class RecordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd('update');
+        $this->validate($request, [
+            'date'          => 'required',
+            'subservice_id' => 'required',
+            'place'         => 'required',
+            'desc'          => 'required',
+            'info'          => 'required',
+            'students.id.0' => 'required'
+        ]);  
+
+        $record = Record::findOrFail($id);
+
+        // Update record
+        $record->update([
+            'date'          => $request->date,
+            'subservice_id' => $request->subservice_id,
+            'place'         => $request->place,
+            'desc'          => $request->desc,
+            'info'          => $request->info
+        ]);    
+        
+        // Update record_student
+        $record->students()->sync($request->students['id']);
+
+        return redirect('record')->with('msg', 'Bimbingan berhasil di <strong>Update</strong>');
     }
 
     /**
