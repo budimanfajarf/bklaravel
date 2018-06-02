@@ -90,7 +90,8 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $student = Student::findOrFail($id);
+        // !Complete
+        $student = Student::with('records')->findOrFail($id);
         return view('students.single', compact('student'));
     }
 
