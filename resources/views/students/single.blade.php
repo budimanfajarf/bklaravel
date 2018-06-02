@@ -33,28 +33,31 @@
                         </div>
                     </form> 
                     <br>
-                    {{-- !Complete --}}
-                    <div class="card-header text-center">Kegiatan yang telah dilaksanakan</div>
-                    <div class="card-body table-responsive">
-                        <table class="table table-striped">
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Tanggal</th>
-                                <th scope="col">Kegiatan</th>
-                                <th scope="col">Aksi</th>                         
-                            </tr>
-                        @foreach ($student->records()->orderBy('date', 'desc')->get() as $index => $record)
-                            <tr>
-                                <td> {{ $index+1 }} </td>
-                                <td> {{ $record->date }} </td>
-                                <td> {{ $record->subservice->name }} </td>
-                                <td>
-                                    <a href="/record/{{ $record->id }}" class="btn btn-outline-info btn-sm" role="button">View</a>
-                                </td>                                
-                            </tr>
-                        @endforeach
-                        </table>
-                    </div>
+                    @if ($student->records()->count())
+                        <div class="card-header text-center">Bimbingan yang telah dilaksanakan oleh {{ $student->name }}</div>
+                        <div class="card-body table-responsive">                        
+                            <table class="table table-striped">
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Tanggal</th>
+                                        <th scope="col">Kegiatan</th>
+                                        <th scope="col">Aksi</th>                         
+                                    </tr>
+                                @foreach ($student->records()->orderBy('date', 'desc')->get() as $index => $record)
+                                    <tr>
+                                        <td> {{ $index+1 }} </td>
+                                        <td> {{ $record->date }} </td>
+                                        <td> {{ $record->subservice->name }} </td>
+                                        <td>
+                                            <a href="/record/{{ $record->id }}" class="btn btn-outline-info btn-sm" role="button">View</a>
+                                        </td>                                
+                                    </tr>
+                                @endforeach
+                                </table> 
+                        </div>                                                        
+                    @else
+                        <div class="card-header text-center">Belum ada bimbingan yang dilaksanakan oleh {{ $student->name }} </div>
+                    @endif
                 </div>
             </div>
         </div>
