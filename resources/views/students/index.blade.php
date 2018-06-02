@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/my.css') }}">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -14,9 +15,21 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>    
-                    @endif                    
-                    <a href="{{ url('/students/create') }}" class="btn btn-primary" role="button" >Tambah Siswa</a>
-                    <br><br>
+                    @endif
+                    <div class="row">
+                        <div class="col-sm-4 my-mr-bottom">
+                            <a href="{{ url('/students/create') }}" class="btn btn-primary" role="button">Tambah Siswa</a>
+                        </div>
+                        <div class="col-sm-4 my-pagination-center">
+                            {{ $students->appends(Request::input())->render() }} 
+                        </div>
+                        <div class="col-sm-4 my-mr-bottom">
+                            <form action="/students">
+                                <input name="search" class="form-control" type="search" placeholder="Search dengan nis atau nama siswa"
+                                value="{{ $search }}">                       
+                            </form>                            
+                        </div>
+                    </div>                   
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -50,8 +63,7 @@
                                 @endforeach
                             </tbody>
                         </table> 
-                    </div> 
-                    {{ $students->appends(Request::input())->render() }}                  
+                    </div>                  
                 </div>
 
             </div>

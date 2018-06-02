@@ -17,13 +17,13 @@
                         </div>    
                     @endif  
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-sm-4 my-mr-bottom">
                             <a href="{{ url('/record/create') }}" class="btn btn-primary" role="button" >Tambah Bimbingan</a>
                         </div>
-                        <div class="col-md-4 my-pagination-center">
+                        <div class="col-sm-4 my-pagination-center">
                             {{ $records->appends(Request::input())->render() }}
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-sm-4 my-mr-bottom">
                             <form action="#">
                                 <input type="text" name="search" class="form-control" placeholder="Search dengan nis atau nama siswa">
                             </form>

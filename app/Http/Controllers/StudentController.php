@@ -28,10 +28,15 @@ class StudentController extends Controller
         return $msg;
     }
     
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::paginate(5);
-        return view('students.index', compact('students'));
+        $search = $request->search;
+        if ($search) {
+            $students = Student::where('name', 'like', '%'.$search.'%')->orWhere('code', 'like', '%'.$search.'%')->paginate(5);
+        } else {
+            $students = Student::paginate(5);
+        }
+        return view('students.index', compact('students','search'));
     }
 
     /**
