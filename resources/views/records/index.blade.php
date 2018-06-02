@@ -24,8 +24,8 @@
                             {{ $records->appends(Request::input())->render() }}
                         </div>
                         <div class="col-sm-4 my-mr-bottom">
-                            <form action="#">
-                                <input type="text" name="search" class="form-control" placeholder="Search dengan nis atau nama siswa">
+                            <form action="/record">
+                                <input type="text" name="search" class="form-control" placeholder="Search dengan nis atau nama siswa" value="{{ $search }}">
                             </form>
                         </div>
                     </div>                  

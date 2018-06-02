@@ -14,10 +14,16 @@ class RecordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $records = Record::with('subservice','students')->orderBy('date', 'desc')->orderBy('id', 'desc')->paginate(3);
-        return view('records.index', compact('records'));
+        $search = $request->search;
+        if ($search) {
+            // !Complete
+            $records = Record::with('subservice','students')->orderBy('date', 'desc')->orderBy('id', 'desc')->paginate(3);            
+        } else {
+            $records = Record::with('subservice','students')->orderBy('date', 'desc')->orderBy('id', 'desc')->paginate(3);
+        }
+        return view('records.index', compact('records', 'search'));
     }
 
     /**
