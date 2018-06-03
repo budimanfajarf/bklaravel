@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Subservice;
 use App\Service;
 use App\Record;
 
@@ -16,13 +15,27 @@ class RecordController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->search;
+        $search  = $request->search;
+        $records = Record::with('subservice','students');
         if ($search) {
-            // !Complete
-            $records = Record::with('subservice','students')->orderBy('date', 'desc')->orderBy('id', 'desc')->paginate(3);            
-        } else {
-            $records = Record::with('subservice','students')->orderBy('date', 'desc')->orderBy('id', 'desc')->paginate(3);
+            $records = $records->where(function($query) use($search){
+                $query->where('date', 'like', '%'.$search.'%');
+                $columns = ['place', 'desc', 'info'];
+                foreach ($columns as $column) {
+                    $query->orWhere($column, 'like', '%'.$search.'%');
+                }
+                
+                $query->orWhereHas('subservice', function($q) use($search){
+                    $q->where('name', 'like', '%'.$search.'%');
+                });                
+
+                $query->orWhereHas('students', function($q) use($search){
+                    $q->where('code', 'like', '%'.$search.'%');
+                    $q->orWhere('name', 'like', '%'.$search.'%');
+                });
+            });          
         }
+        $records = $records->orderBy('date', 'desc')->orderBy('id', 'desc')->paginate(3);
         return view('records.index', compact('records', 'search'));
     }
 
