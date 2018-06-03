@@ -30,12 +30,14 @@ class StudentController extends Controller
     
     public function index(Request $request)
     {
-        $search = $request->search;
+        $search   = $request->search;
+        $students = new Student;
         if ($search) {
-            $students = Student::where('name', 'like', '%'.$search.'%')->orWhere('code', 'like', '%'.$search.'%')->paginate(5);
-        } else {
-            $students = Student::paginate(5);
-        }
+            $students = $students->where('name', 'like', '%'.$search.'%')
+                                 ->orWhere('code', 'like', '%'.$search.'%')
+                                 ->orWhere('class', 'like', '%'.$search.'%');
+        }   
+        $students = $students->paginate(5);
         return view('students.index', compact('students','search'));
     }
 
@@ -164,7 +166,9 @@ class StudentController extends Controller
     {
         if($search != null)
         {
-            $students = Student::where('name', 'like', '%'.$search.'%')->orWhere('code', 'like', '%'.$search.'%')->get();
+            $students = Student::where('name', 'like', '%'.$search.'%')
+                                 ->orWhere('code', 'like', '%'.$search.'%')
+                                 ->orWhere('class', 'like', '%'.$search.'%')->get();
             return $students;    
         }
     }

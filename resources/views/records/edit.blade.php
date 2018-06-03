@@ -3,6 +3,7 @@
 @section('content')
 <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script> 
 <script src="{{ asset('js/students.js') }}"></script> 
+<script src="{{ asset('js/my-bootstrap.js') }}"></script> 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -61,7 +62,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="search">Cari Siswa</label>
-                                    <input name="search" id="search" type="text" class="form-control" autocomplete="off" placeholder="Cari Siswa dengan Nama atau Nim" >
+                                    <input name="search" id="search" type="text" class="form-control" autocomplete="off" placeholder="S e a r c h  .  .  ." data-toggle="tooltip" data-placement="top" title="Cari NIS / Nama / Kelas">
                                 </div>
                                 <div id="table_container"></div>
                                 <br>
