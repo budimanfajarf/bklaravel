@@ -2,6 +2,8 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/my.css') }}">
+<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script> 
+<script src="{{ asset('js/my-bootstrap.js') }}"></script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -25,8 +27,8 @@
                         </div>
                         <div class="col-sm-4 my-mr-bottom">
                             <form action="/students">
-                                <input name="search" class="form-control" type="search" placeholder="Search dengan nis atau nama siswa"
-                                value="{{ $search }}">                       
+                                <input name="search" class="form-control" type="search" placeholder="S e a r c h  .  .  ."
+                                value="{{ $search }}" data-toggle="tooltip" data-placement="top" title="Cari NIS / Nama / Kelas">                       
                             </form>                            
                         </div>
                     </div>                   
