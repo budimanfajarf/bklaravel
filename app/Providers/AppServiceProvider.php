@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        /**
+         * For default database character set NOT utf8mb4
+         * which NOT includes support for storing emojis
+         * https://laravel-news.com/laravel-5-4-key-too-long-error
+         */        
+        Schema::defaultStringLength(191);
     }
 
     /**
