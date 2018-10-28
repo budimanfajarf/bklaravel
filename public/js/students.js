@@ -1,10 +1,19 @@
 $(document).ready(function(){
-    
+
+    // https://stackoverflow.com/questions/1909441/how-to-delay-the-keyup-handler-until-the-user-stops-typing
+    var delay = (function(){
+        var timer = 0;
+        return function(callback, ms){
+            clearTimeout (timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();    
+
     // Fungsi Search Siswa
-    $('#search').keypress(function(event) {
-        if (event.which == 13) {
+    $('#search').keyup(function() {
+        delay(function(){
             $.ajax({
-                url      : "/api/students/" + $(this).val(),
+                url      : "/api/students/" + $('#search').val(),
                 method   : "GET",
                 dataType : "json"
             }).done(function(data){                    
@@ -28,16 +37,16 @@ $(document).ready(function(){
                                     "<input type='hidden' value='"+ id +"' name='id'>" +
                                     "<a href='#' class='add btn btn-outline-primary btn-sm' role='button'>Add</a>" +
                                 "</td>" +
-                              "</tr>";                        
+                            "</tr>";                        
                 });                   
                 table += "</table>"; 
                 $("#table_container").empty();  
                 $("#table_container").append(table);                         
-            })
-            return false;
-        }
-    });
-
+            })              
+            return false; 
+        }, 500);
+    });    
+    
     // Fungsi Click Add
     $(document).on("click", ".add", function(){
         let parentTr = $(this).parents("tr");
