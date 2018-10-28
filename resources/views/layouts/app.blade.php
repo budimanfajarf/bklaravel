@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
+    <title>Bimbingan Konseling</title>
 
     <!-- Favicon-->
     <link href="{{ asset('images/logo.png') }}" rel="icon" type="image/png">    
@@ -22,14 +23,28 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    {{-- Custom Styles --}}
+    <link rel="stylesheet" href="{{ asset('css/my.css') }}">    
 </head>
 <body>
+    <!-- background -->
+    <img class="mybg" src="{{ asset('images/bg.jpg') }}" alt="" style="z-index: -1;">
+    <!-- end background -->    
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        {{-- <nav class="navbar navbar-expand-md navbar-light navbar-laravel"> --}}
+        <nav class="navbar navbar-expand-md navbar-dark navbar-laravel bg-dark bg-bk">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <div class="media">
+                        <img class="align-self-center mr-3" src="{{ asset('images/logo.png') }}" alt="Generic placeholder image" width="50px" height="50px">
+                        <div class="media-body">
+                            <h4 class="mt-0 mb-1 font-weight-bold">Bimbingan Konseling</h4>
+                            <h6 class="mt-0 mb-0" style="letter-spacing: 2px">SMK NEGERI 1 MAJALAYA</h6>
+                        </div>
+                    </div>  
                 </a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -47,9 +62,9 @@
                             {{-- <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li> --}}
                             {{-- <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li> --}}
                         @else
-                            <li><a class="nav-link" href="{{ url('/students') }}">Siswa</a></li>                        
-                            <li><a class="nav-link" href="{{ url('/services') }}">Layanan</a></li>                                                    
-                            <li><a class="nav-link" href="{{ url('/record') }}">Bimbingan</a></li>                                                                                
+                            <li><a href="{{ url('/students') }}" class="nav-link {{ (starts_with(Route::currentRouteName(), 'students')) ? 'active':'' }}">Siswa</a></li>                        
+                            <li><a href="{{ url('/services') }}" class="nav-link {{ (starts_with(Route::currentRouteName(), 'services')) ? 'active':'' }}">Layanan</a></li>                                                    
+                            <li><a href="{{ url('/record') }}" class="nav-link {{ (starts_with(Route::currentRouteName(), 'record')) ? 'active':'' }}">Bimbingan</a></li>                                                                                
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

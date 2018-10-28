@@ -6,3 +6,32 @@
 .my-mr-bottom {
     margin-bottom: 1rem;
 }
+
+img.mybg {
+    /* Set rules to fill background */
+    min-height: 100%;
+    min-width: 1024px;
+  
+    /* Set up proportionate scaling */
+    width: 100%;
+    height: auto;
+  
+    /* Set up positioning */
+    position: fixed;
+    top: 0;
+    left: 0;
+  
+    /*new*/
+    /*style="z-index: -1;"*/
+  }
+  
+  @media screen and (max-width: 1024px) { /* Specific to this particular image */
+    img.mybg {
+      left: 50%;
+      margin-left: -512px;   /* 50% */
+    }
+  }
+
+  .bg-bk {
+    background-image: linear-gradient(to right, rgba(53, 59, 72,1.0), rgba(127, 143, 166,1.0));
+  }

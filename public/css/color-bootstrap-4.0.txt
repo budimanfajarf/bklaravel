@@ -1,0 +1,4 @@
+dark #343a40 rgb(52,58,64)
+secondary #6c757d rgb(108,117,125)
+primary #007bff rgb(0,123,255)
+info #17a2b8  rgb(23,162,184)

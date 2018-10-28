@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/my.css') }}">
 <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script> 
 <script src="{{ asset('js/my-bootstrap.js') }}"></script>
 <div class="container">
