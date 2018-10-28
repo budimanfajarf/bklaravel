@@ -39,7 +39,8 @@
                                     <th scope="col">Tempat</th>
                                     <th scope="col">Uraian</th>
                                     <th scope="col">Keterangan</th>    
-                                    <th scope="col">Siswa yang bersangkutan</th>                   <th scope="col">Aksi</th> 
+                                    <th scope="col">Siswa yang bersangkutan</th>                   
+                                    <th scope="col">Aksi</th> 
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,13 +59,26 @@
                                             @endforeach
                                         </td> 
                                         <td>
-                                            <a href="/record/{{ $record->id }}" class="btn btn-info btn-sm" role="button">View</a>
-                                            <a href="/record/{{ $record->id }}/edit" class="btn btn-primary btn-sm" role="button">Edit</a>
-                                            <form action="/record/{{ $record->id }}" method="POST" style="display:inline">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="_method" value="DELETE">  
-                                                <button class="btn btn-danger btn-sm">Delete</button>
-                                            </form>
+                                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Click
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="/record/{{ $record->id }}">View</a>
+                                                        <a class="dropdown-item" href="/record/{{ $record->id }}/edit">Edit</a>                                                       
+                                                        <a class="dropdown-item" href="#" 
+                                                            onclick="event.preventDefault(); document.getElementById('delete-record-form').submit();"
+                                                        >Delete
+                                                        </a>
+                                                        <form id="delete-record-form" action="/record/{{ $record->id }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                            <input type="hidden" name="_method" value="DELETE">                                                     
+                                                        </form>                                                        
+                                                        <a class="dropdown-item" href="/record/{{ $record->id }}/pdf">Print</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td> 
                                     </tr>  
                                     @php $i++ @endphp                              
