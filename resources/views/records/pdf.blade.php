@@ -84,7 +84,7 @@
         <tr>
             <td style="width: 20%;">Tanggal</td>
             <td style="width: 2%;">:</td>
-            <td>{{ $record->date }}</td>
+            <td>{{ \Carbon\Carbon::parse($record->date)->format('d-m-Y') }}</td>
         </tr>
         <tr>
             <td>Layanan</td>
