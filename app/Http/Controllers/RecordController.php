@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Service;
 use App\Record;
+use PDF;
 
 class RecordController extends Controller
 {
@@ -153,4 +154,22 @@ class RecordController extends Controller
         Record::findOrFail($id)->delete();
         return redirect('record')->with('msg', 'Bimbingan berhasil di <strong>Hapus</strong>');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function pdf($id)
+    {
+        $record = Record::with('subservice.service','students')->findOrFail($id);
+        // dd($record);
+        // return view('records.pdf', compact('record'));
+        return PDF::loadView('records.pdf', compact('record'))
+                ->setPaper('a4', 'potrait')
+                ->setOptions(['defaultFont' => 'sans-serif'])
+                ->stream('LaporanKegiatan-'.$record->id.'-'.now()->format('Ymd').'.pdf');           
+    }
+
 }

@@ -64,7 +64,7 @@
                                 <button class="btn btn-danger btn-lg">Delete</button>
                             </form>
                             <a href="/record/{{ $record->id }}/edit" class="btn btn-primary btn-lg" role="button">Edit</a>                            
-                            <a href="#" class="btn btn-info btn-lg" role="button">Print</a>
+                            <a href="/record/{{ $record->id }}/pdf" class="btn btn-info btn-lg" role="button">Print</a>
                         </div>                        
                     </div>               
                 </div>
